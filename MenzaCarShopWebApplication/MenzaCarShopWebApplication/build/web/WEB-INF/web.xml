@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AddCarServlet</servlet-name>
+        <servlet-class>controller.AddCarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCarServlet</servlet-name>
+        <servlet-class>controller.ViewCarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyCarServlet</servlet-name>
+        <servlet-class>controller.BuyCarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCarServlet</servlet-name>
+        <servlet-class>controller.EditCarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TotalCarsServlet</servlet-name>
+        <servlet-class>controller.TotalCarsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCarServlet</servlet-name>
+        <url-pattern>/AddCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCarServlet</servlet-name>
+        <url-pattern>/ViewCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyCarServlet</servlet-name>
+        <url-pattern>/BuyCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCarServlet</servlet-name>
+        <url-pattern>/EditCarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TotalCarsServlet</servlet-name>
+        <url-pattern>/TotalCarsServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <display-name>Customer</display-name>
+        <web-resource-collection>
+            <web-resource-name>CustomerResource</web-resource-name>
+            <description>this is all customer can do</description>
+            <url-pattern>/view_car.jsp</url-pattern>
+            <url-pattern>/view_car_outcome.jsp</url-pattern>
+            <url-pattern>/buy_car_outcome.jsp</url-pattern>
+            <url-pattern>/ViewCarServlet</url-pattern>
+            <url-pattern>/BuyCarServlet</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>customer Authentication</description>
+            <role-name>Customer</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Onwer</display-name>
+        <web-resource-collection>
+            <web-resource-name>OnwerResource</web-resource-name>
+            <description>this is all owner can do</description>
+            <url-pattern>/add_car.jsp</url-pattern>
+            <url-pattern>/add_car_outcome.jsp</url-pattern>
+            <url-pattern>/edit_price_car.jsp</url-pattern>
+            <url-pattern>/edit_price_car_outcome.jsp</url-pattern>
+            <url-pattern>/total_car_outcome.jsp</url-pattern>
+            <url-pattern>/total_number_car.jsp</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>onwer Authintication</description>
+            <role-name>Owner</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>MemzaCarShopRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/Login.jsp</form-login-page>
+            <form-error-page>/login_error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>custome can only view car and buying cars</description>
+        <role-name>Customer</role-name>
+    </security-role>
+    <security-role>
+        <description>Owner can add car and can see total number of car are the and can edit prices of the car</description>
+        <role-name>Owner</role-name>
+    </security-role>
+</web-app>
